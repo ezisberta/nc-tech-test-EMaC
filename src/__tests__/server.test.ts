@@ -2,27 +2,27 @@ import * as request from "supertest";
 import { app } from "../server";
 
 describe("GET /cards/:cardId sucsess", () => {
-  test.only("returns 200 status", async () => {
+  test("returns 200 status", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.status).toBe(200);
   });
-  test.only("returns matching card title", async () => {
+  test("returns matching card title", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(
       expect.objectContaining({ title: "card 3 title" })
     );
   });
-  test.only("returns matching card id", async () => {
+  test("returns matching card id", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(
       expect.objectContaining({ card_id: "card003" })
     );
   });
-  test.only("returns matching base price", async () => {
+  test("returns matching base price", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(expect.objectContaining({ basePrice: 200 }));
   });
-  test.only("returns matching pages", async () => {
+  test("returns matching pages", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(
       expect.objectContaining({
@@ -47,13 +47,13 @@ describe("GET /cards/:cardId sucsess", () => {
       })
     );
   });
-  test.only("returns matching imageUrl", async () => {
+  test("returns matching imageUrl", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(
       expect.objectContaining({ imageUrl: "/front-cover-landscape.jpg" })
     );
   });
-  test.only("returns matching sizes", async () => {
+  test("returns matching sizes", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(
       expect.objectContaining({
@@ -63,6 +63,19 @@ describe("GET /cards/:cardId sucsess", () => {
         ],
       })
     );
+  });
+});
+
+describe('"GET /cards/:cardId errors"', () => {
+  test("returns 400 status if id is not in a valid format", async () => {
+    const response = await request(app).get("/cards/carrd005");
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe("Bad request");
+  });
+  test("returns 404 status if id does not exist", async () => {
+    const response = await request(app).get("/cards/card005");
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe("Not found");
   });
 });
 
