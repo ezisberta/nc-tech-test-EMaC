@@ -79,6 +79,43 @@ describe('"GET /cards/:cardId errors"', () => {
   });
 });
 
+describe("GET cards/", () => {
+  test("returns 200 status", async () => {
+    const response = await request(app).get("/cards");
+    expect(response.status).toBe(200);
+  });
+  test("returns an array of cards, each containing an id", async () => {
+    const response = await request(app).get("/cards");
+    response.body.forEach((card) => {
+      expect(card).toEqual(
+        expect.objectContaining({
+          card_id: expect.any(String),
+        })
+      );
+    });
+  });
+  test("returns an array of cards, each containing a title", async () => {
+    const response = await request(app).get("/cards");
+    response.body.forEach((card) => {
+      expect(card).toEqual(
+        expect.objectContaining({
+          title: expect.any(String),
+        })
+      );
+    });
+  });
+  test("returns an array of cards, each containing an imageUrl", async () => {
+    const response = await request(app).get("/cards");
+    response.body.forEach((card) => {
+      expect(card).toEqual(
+        expect.objectContaining({
+          imageUrl: expect.any(String),
+        })
+      );
+    });
+  });
+});
+
 // test('returns matching card title', async () => {
 //   const response = await request(app).get('/cards/card001')
 

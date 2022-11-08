@@ -1,8 +1,7 @@
-const { fetchCardById } = require("./models");
+const { fetchCardById, fetchAllCards } = require("./models");
 
 exports.getCardById = (req, res, next) => {
   const cardId = req.params.cardId;
-  console.log("CONTROLLER", cardId);
 
   if (!/^(card)\d{3}$/.test(cardId)) {
     //regex to check if id is not in the right format
@@ -20,4 +19,10 @@ exports.getCardById = (req, res, next) => {
   }
 
   res.send(fetchCardById(cardId)); //destructured fetched data in model
+};
+
+exports.getAllCards = (req, res, next) => {
+  console.log("CONTROLLER");
+  fetchAllCards();
+  res.send({});
 };

@@ -34,3 +34,7 @@ exports.fetchCardById = (cardId) => {
 
   return { title, card_id, basePrice, pages, imageUrl, availableSizes };
 };
+
+exports.fetchAllCards = () => {
+  console.log("Model");
+};
