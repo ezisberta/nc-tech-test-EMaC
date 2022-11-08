@@ -37,4 +37,16 @@ exports.fetchCardById = (cardId) => {
 
 exports.fetchAllCards = () => {
   console.log("Model");
+
+  return cards.map((card) => {
+    // iterate through cards to extract a few details according to the expected obj
+    const cardFrontCoverTemplate = card.pages.find(
+      (page) => page.title === "Front Cover" //What we did in fetchCardById now aplied to all cards
+    ).templateId;
+    const imageUrl = templates.find(
+      (template) => template.id === cardFrontCoverTemplate
+    ).imageUrl;
+
+    return { card_id: card.id, title: card.title, imageUrl };
+  });
 };

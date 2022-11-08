@@ -22,7 +22,7 @@ exports.getCardById = (req, res, next) => {
 };
 
 exports.getAllCards = (req, res, next) => {
-  console.log("CONTROLLER");
   fetchAllCards();
-  res.send({});
+
+  res.send(fetchAllCards()); //destructured in model
 };
