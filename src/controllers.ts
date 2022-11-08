@@ -1,7 +1,10 @@
 const { fetchCardById } = require("./models");
 
 exports.getCardById = (req, res, next) => {
-  console.log("CONTROLLER");
-  fetchCardById();
-  res.send({});
+  const cardId = req.params.cardId;
+  console.log("CONTROLLER", cardId);
+
+  fetchCardById(cardId);
+
+  res.send(fetchCardById(cardId)); //destructured fetched data in model
 };

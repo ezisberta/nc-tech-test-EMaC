@@ -2,33 +2,27 @@ import * as request from "supertest";
 import { app } from "../server";
 
 describe("GET /cards/:cardId sucsess", () => {
-  test("returns 200 status", async () => {
+  test.only("returns 200 status", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.status).toBe(200);
   });
-  test("returns matching card title", async () => {
+  test.only("returns matching card title", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(
       expect.objectContaining({ title: "card 3 title" })
     );
   });
-  test("returns matching card id", async () => {
+  test.only("returns matching card id", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(
       expect.objectContaining({ card_id: "card003" })
     );
   });
-  test("returns matching base price", async () => {
+  test.only("returns matching base price", async () => {
     const response = await request(app).get("/cards/card003");
-    expect(response.body).toEqual(expect.objectContaining({ base_price: 200 }));
+    expect(response.body).toEqual(expect.objectContaining({ basePrice: 200 }));
   });
-  test("returns matching imageUrl", async () => {
-    const response = await request(app).get("/cards/card003");
-    expect(response.body).toEqual(
-      expect.objectContaining({ imageUrl: "/front-cover-landscape.jpg" })
-    );
-  });
-  test("returns matching pages", async () => {
+  test.only("returns matching pages", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(
       expect.objectContaining({
@@ -53,7 +47,13 @@ describe("GET /cards/:cardId sucsess", () => {
       })
     );
   });
-  test("returns matching sizes", async () => {
+  test.only("returns matching imageUrl", async () => {
+    const response = await request(app).get("/cards/card003");
+    expect(response.body).toEqual(
+      expect.objectContaining({ imageUrl: "/front-cover-landscape.jpg" })
+    );
+  });
+  test.only("returns matching sizes", async () => {
     const response = await request(app).get("/cards/card003");
     expect(response.body).toEqual(
       expect.objectContaining({
