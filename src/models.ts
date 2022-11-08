@@ -36,8 +36,6 @@ exports.fetchCardById = (cardId) => {
 };
 
 exports.fetchAllCards = () => {
-  console.log("Model");
-
   return cards.map((card) => {
     // iterate through cards to extract a few details according to the expected obj
     const cardFrontCoverTemplate = card.pages.find(

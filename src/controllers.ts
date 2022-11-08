@@ -26,3 +26,7 @@ exports.getAllCards = (req, res, next) => {
 
   res.send(fetchAllCards()); //destructured in model
 };
+
+exports.postCard = (req, res, next) => {
+  res.status(201).send({});
+};

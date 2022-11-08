@@ -1,5 +1,5 @@
 import * as express from "express";
-const { getCardById, getAllCards } = require("./controllers");
+const { getCardById, getAllCards, postCard } = require("./controllers");
 
 export const app = express();
 
@@ -9,11 +9,9 @@ app.get("/cards/:cardId", getCardById);
 
 app.get("/cards", getAllCards);
 
+app.post("/cards", postCard);
+
 app.use(({ status, message }, req, res, next) => {
   //distructured error obj above
   res.status(status).send({ message });
 });
-
-// app.get('/cards/:cardId/:sizeId?', () => {
-//   // respond with card by id
-// })

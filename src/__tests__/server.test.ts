@@ -116,11 +116,46 @@ describe("GET cards/", () => {
   });
 });
 
-// test('returns matching card title', async () => {
-//   const response = await request(app).get('/cards/card001')
+describe("POST /cards errors", () => {
+  test("returns 400 if request is nmissing data", async () => {
+    const cardToAdd = {
+      title: "cardToAdd title",
+      sizes: ["sm", "md", "gt"],
+      basePrice: 200,
+    };
+    const response = await request(app).post("/cards").send(cardToAdd);
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe("Bad request: missing pages");
+  });
+});
 
-//   expect(response.status).toBe(200)
-//   expect(response.body).toEqual(expect.objectContaining({
-//     title: 'card 1 title',
-//   }))
-// })
+// describe("POST /cards sucsess", () => {
+//   test("adds a card to the system", async () => {
+//     const cardToAdd = {
+//       title: "cardToAdd title",
+//       sizes: ["sm", "md", "gt"],
+//       basePrice: 200,
+//       pages: [
+//         {
+//           title: "Front Cover",
+//           templateId: "template001",
+//         },
+//         {
+//           title: "Inside Left",
+//           templateId: "template002",
+//         },
+//         {
+//           title: "Inside Right",
+//           templateId: "template003",
+//         },
+//         {
+//           title: "Back Cover",
+//           templateId: "template004",
+//         },
+//       ],
+//     };
+//     const response = await request(app).post("/cards").send(cardToAdd);
+//     expect(response.status).toBe(201);
+//     expect(response.body).toEqual({ id: "card004", ...cardToAdd });
+//   });
+// });
