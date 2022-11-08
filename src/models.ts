@@ -10,6 +10,10 @@ const templates = require(`./${modeStr}data/${modeStr}templates.json`);
 exports.fetchCardById = (cardId) => {
   const cardToFetch = cards.find((card) => card.id === cardId);
 
+  if (cardToFetch === undefined) {
+    return "Not found"; //tell controller the card was not found
+  }
+
   const { title, id, basePrice, pages, sizes } = cardToFetch; //most keys need no alterations, so decided to destructure
   const card_id = id; //change key name to match expected response
 
